@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Posts from "./components/posts";
+import CreatePost from "./components/createPost";
+import EditPost from "./components/editPost";
+import LikedPosts from "./components/likedPosts";
+import DislikedPosts from "./components/dislikedPosts";
+import { PostProvider } from "./components/postContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PostProvider>
+      <Router>
+        <Route path="/" exact>
+          <Posts />
+        </Route>
+        <Route path="/create" exact>
+          <CreatePost />
+        </Route>
+        <Route path="/editpost/:id" exact>
+          <EditPost />
+        </Route>
+        <Route path="/likedposts" exact>
+          <LikedPosts />
+        </Route>
+        <Route path="/dislikedposts" exact>
+          <DislikedPosts />
+        </Route>
+      </Router>
+    </PostProvider>
   );
 }
 
